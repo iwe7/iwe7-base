@@ -16,6 +16,9 @@ import { Iwe7TitleServiceInterface } from "./interface";
 })
 export abstract class Iwe7TitleService implements Iwe7TitleServiceInterface {
   private _title: string;
+  get title() {
+    return this._title;
+  }
   set title(val: string) {
     this._title = val;
     this.__title.setTitle(val);

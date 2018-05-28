@@ -19,6 +19,7 @@ export interface KeyBooleanInterface {
 }
 
 export interface Iwe7TitleServiceInterface {
+  title: string;
   listener(): Observable<any>;
 }
 
