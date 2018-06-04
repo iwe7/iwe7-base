@@ -21,9 +21,9 @@ export class Iwe7WithListen extends Iwe7CoreComponent {
     }
 }
 
-export class Iwe7WithIcss extends Iwe7WithListen {
+export class BaseWithIcss extends Iwe7WithListen {
     style$: BehaviorSubject<KeyValueInterface> = new BehaviorSubject({});
-    private styleInputs: string[];
+    private styleInputs: string[] = [];
     ele: ElementRef;
     icss: Iwe7IcssService;
     @Input()
@@ -60,7 +60,7 @@ export class Iwe7WithIcss extends Iwe7WithListen {
     }
 }
 
-export abstract class BaseWithLocation extends Iwe7WithIcss {
+export abstract class BaseWithLocation extends BaseWithIcss {
     location: Location;
     get locationStream(): Observable<any> {
         return this.getCyc('location', true);
