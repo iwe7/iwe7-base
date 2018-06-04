@@ -10,11 +10,10 @@ import {
   debounceTime,
   takeLast
 } from "rxjs/operators";
-import { Iwe7TitleServiceInterface } from "./interface";
 @Injectable({
   providedIn: "root"
 })
-export abstract class Iwe7TitleService implements Iwe7TitleServiceInterface {
+export class Iwe7TitleService {
   private _title: string;
   get title() {
     return this._title;
@@ -28,7 +27,7 @@ export abstract class Iwe7TitleService implements Iwe7TitleServiceInterface {
   private __title: Title;
 
   datas: any[] = [];
-  constructor(public injector: Injector) {}
+  constructor(public injector: Injector) { }
 
   listener(): Observable<any> {
     this.router = this.injector.get(Router);

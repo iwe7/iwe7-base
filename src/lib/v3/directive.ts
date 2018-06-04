@@ -8,13 +8,5 @@ export abstract class Iwe7BaseDirective extends BaseWithClass
   implements OnInit {
   constructor(injector: Injector, prefixCls: string) {
     super(injector, prefixCls);
-    const ele = this.ele.nativeElement;
-    onTap(ele)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(res => {});
-    onTouchEnd(ele)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(res => {});
   }
-  ngOnInit() {}
 }

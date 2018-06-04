@@ -4,8 +4,7 @@ import {
   Injector,
   ComponentFactoryResolver
 } from "@angular/core";
-import { NgElementConstructor } from "@angular/elements";
-import { createCustomElement } from "@angular/elements";
+import { NgElementConstructor, createCustomElement } from "@angular/elements";
 import { Observable, of, from } from "rxjs";
 
 declare const window: any;
