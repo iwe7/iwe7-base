@@ -15,6 +15,5 @@ export abstract class Iwe7PageDetail extends Iwe7PageBase {
             });
         });
     }
-
     abstract load(res: any): void;
 }
