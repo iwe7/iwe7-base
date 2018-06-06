@@ -22,25 +22,24 @@ export class Iwe7WithListen extends Iwe7CoreComponent {
 }
 
 export class BaseWithIcss extends Iwe7WithListen {
-    style$: BehaviorSubject<KeyValueInterface> = new BehaviorSubject({});
     private styleInputs: string[] = [];
     ele: ElementRef;
     icss: Iwe7IcssService;
     @Input()
     set styleObj(val: { [key: string]: any }) {
-        this.style$.next(val);
+        this.setCyc('ngStyle', val);
     }
     constructor(injector: Injector) {
         super(injector);
-        this.ele = this.injector.get(ElementRef);
-        this.icss = this.injector.get(Iwe7IcssService);
-        this.icss
-            .init(this.style$.pipe(
-                takeUntil(this.getCyc('ngOnDestroy', true))
-            ), this.ele)
-            .subscribe(res => { });
-        this.getCyc('ngOnChanges').subscribe(res => {
-            this.updateStyleObj();
+        this.runOutsideAngular(() => {
+            this.ele = this.injector.get(ElementRef);
+            this.icss = this.injector.get(Iwe7IcssService);
+            this.icss
+                .init(this.getCyc('ngStyle'), this.ele)
+                .subscribe(res => { });
+            this.getCyc('ngOnChanges').subscribe(res => {
+                this.updateStyleObj();
+            });
         });
     }
 
@@ -63,13 +62,13 @@ export class BaseWithIcss extends Iwe7WithListen {
 export abstract class BaseWithLocation extends BaseWithIcss {
     location: Location;
     get locationStream(): Observable<any> {
-        return this.getCyc('location', true);
+        return this.getCyc('ngLocation', true);
     }
     constructor(public injector: Injector) {
         super(injector);
         this.location = this.injector.get(Location);
         this.location.subscribe(res => {
-            this.setCyc('location', res, true);
+            this.setCyc('ngLocation', res, true);
         });
     }
     back() {

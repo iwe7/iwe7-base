@@ -13,7 +13,8 @@ export function factoryGlobalService() {
   (<any>window).meepo = (<any>window).meepo || {};
   let { meepo } = <any>window;
   meepo = meepo || {};
-  meepo.elements = meepo.elements || new ElementService();
+  const elementService = new ElementService();
+  meepo.elements = meepo.elements || elementService;
   (<any>window).meepo = meepo;
   return meepo.elements;
 }
