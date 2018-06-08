@@ -2,11 +2,12 @@ import { Iwe7TitleService } from './iwe7-title.service';
 import { Iwe7IcssService } from 'iwe7-icss';
 import { ElementRef, Input, Injector, OnDestroy, Renderer2, SimpleChanges, SimpleChange } from '@angular/core';
 import { Observable, BehaviorSubject, Subject, fromEvent } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { Iwe7CoreComponent } from 'iwe7-core';
 import { KeyValueInterface } from './interface';
 import { Location } from '@angular/common';
 import * as _ from 'lodash';
+import { ucfirst } from 'iwe7-util';
 
 export class Iwe7WithListen extends Iwe7CoreComponent {
     render: Renderer2;
@@ -16,7 +17,10 @@ export class Iwe7WithListen extends Iwe7CoreComponent {
     }
     listen(target: any, eventName: string): Observable<Event> {
         return fromEvent(target, eventName).pipe(
-            takeUntil(this.getCyc('ngOnDestroy', true))
+            takeUntil(this.getCyc('ngOnDestroy', true)),
+            tap(res => {
+                this.setCyc(`ngOn${ucfirst(eventName)}`, res);
+            })
         ) as Observable<Event>;
     }
 }
