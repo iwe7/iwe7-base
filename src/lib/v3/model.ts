@@ -1,10 +1,9 @@
 import { Iwe7TitleService } from './iwe7-title.service';
 import { Iwe7IcssService } from 'iwe7-icss';
-import { ElementRef, Input, Injector, OnDestroy, Renderer2, SimpleChanges, SimpleChange } from '@angular/core';
-import { Observable, BehaviorSubject, Subject, fromEvent } from 'rxjs';
+import { ElementRef, Input, Injector, Renderer2 } from '@angular/core';
+import { Observable, fromEvent } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Iwe7CoreComponent } from 'iwe7-core';
-import { KeyValueInterface } from './interface';
 import { Location } from '@angular/common';
 import * as _ from 'lodash';
 import { ucfirst } from 'iwe7-util';
